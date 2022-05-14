@@ -19,10 +19,8 @@ function activateMenuAtCurrentSection (section) {
   const sectionTopReachOrPassedTargeline = targetLine >= sectionTop
   const sectionEndPassedTargetline = sectionEndsAt <= targetLine
   const sectionBoundaries = sectionTopReachOrPassedTargeline && !sectionEndPassedTargetline
-
   const menuElement = document.querySelector(`.menu a[href*=${section.getAttribute('id')}]`)
-
-
+  
   if (sectionBoundaries) {
     menuElement.classList.add('active')
   } else {
