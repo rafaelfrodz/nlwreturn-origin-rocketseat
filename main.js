@@ -5,43 +5,30 @@ onScroll()
 function onScroll() {
   showNavOnScroll()
   showBackToTopButtonOnScroll()
-  activateMenuAtCurrentSection()
+  activateMenuAtCurrentSection(home)
+  activateMenuAtCurrentSection(services)
+  activateMenuAtCurrentSection(about)
+  activateMenuAtCurrentSection(contact)
 }
 
-function activateMenuAtCurrentSection () {
-  const targetLine = screenY + innerHeight / 2
-  const sectionTop = home.offsetTop 
-  const sectionHeight = home.offsetHeight
+function activateMenuAtCurrentSection (section) {
+  const targetLine = scrollY + innerHeight / 2
+  const sectionTop = section.offsetTop 
+  const sectionHeight = section.offsetHeight
+  const sectionEndsAt = sectionTop + sectionHeight
+  const sectionTopReachOrPassedTargeline = targetLine >= sectionTop
+  const sectionEndPassedTargetline = sectionEndsAt <= targetLine
+  const sectionBoundaries = sectionTopReachOrPassedTargeline && !sectionEndPassedTargetline
 
-  const sectionTopReachOrPassedTargeline  if (sectionTop < targetLine) {
-    
-  } 
+  const menuElement = document.querySelector(`.menu a[href*=${section.getAttribute('id')}]`)
 
+
+  if (sectionBoundaries) {
+    menuElement.classList.add('active')
+  } else {
+    menuElement.classList.remove('active')
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function showNavOnScroll() {
   if (scrollY > 0) {
@@ -71,4 +58,4 @@ ScrollReveal({
   origin: 'top',
   distance: '30px',
   duration: 700,
-}).reveal('#home, #home img, #home .stats, #services header, #services .card, #about, #about header, #about .content ');
+}).reveal('#home, #home img, #home .stats, #services, #services header, #services .card, #about, #about header, #about img, #about .content, #contact, #contact heade, #contact img , #contact .content, footer');
